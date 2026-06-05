@@ -84,7 +84,7 @@ GitHub Issue URL
 │   │                              Pass 2: fix planning
 │   ├── code_editor.py           # LLM-powered file editor with retry
 │   ├── pr_generator.py          # Structured PR title + body generator
-│   ├── llm_backends.py          # Gemini / Groq / Ollama clients
+│   ├── llm_backends.py          # Gemini / Groq clients
 │   └── config.py                # Config + env var management
 ├── tools/
 │   ├── github_tool.py           # GitHub REST API (issues, comments, PRs)
@@ -132,6 +132,11 @@ cd PocketFM
 export GEMINI_API_KEY=your_key_here
 ```
 
+> [!TIP]
+> **API Rate Limit Design Decision:** The default free tier for Gemini's "Pro" models limits users to just 2 requests per minute (RPM). Because this agent makes multiple chained LLM calls in rapid succession (Pass 1 file identification, Pass 2 planning, and multiple edit passes), using a "Pro" model on a free tier will immediately trigger a `429 Too Many Requests` error. 
+> 
+> To gracefully bypass this, we run the agent with the **`gemini-2.5-flash`** model (which offers 15 RPM on the free tier). This provides enough throughput for the entire agent pipeline to run successfully in one shot without hitting API rate limit walls.
+
 #### Option B: Groq (Free — Ultra Fast)
 
 1. Go to [https://console.groq.com](https://console.groq.com)
@@ -142,18 +147,7 @@ export GEMINI_API_KEY=your_key_here
 export GROQ_API_KEY=your_key_here
 ```
 
-#### Option C: Ollama (Fully Local — No API Key)
 
-1. Install Ollama: [https://ollama.com](https://ollama.com)
-2. Pull the recommended model:
-
-```bash
-ollama pull qwen2.5-coder:32b
-# Or lighter alternative:
-ollama pull qwen2.5-coder:7b
-```
-
-3. Ollama runs at `http://localhost:11434` by default — no config needed.
 
 ### 3. (Optional) GitHub Token
 
