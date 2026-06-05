@@ -177,17 +177,19 @@ The tool automatically falls back to pure Python grep if ripgrep isn't available
 
 ## Usage
 
-### Basic usage
+### Assignment Reproduction Command
+
+To reproduce the exact sample run provided in the `sample_outputs/` directory (using the Gemini API with the `gemini-2.5-flash` model to gracefully handle rate limits), run the following command:
 
 ```bash
-# Using Gemini (default)
-python main.py https://github.com/spf13/cobra/issues/1234
+python main.py https://github.com/spf13/cobra/issues/1234 --model gemini-2.5-flash
+```
 
-# Using Groq
+### Other options
+
+```bash
+# Using Groq (if configured)
 python main.py https://github.com/spf13/cobra/issues/1234 --llm groq
-
-# Using Ollama (local)
-python main.py https://github.com/spf13/cobra/issues/1234 --llm ollama
 ```
 
 ### All options
