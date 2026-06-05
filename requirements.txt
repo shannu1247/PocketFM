@@ -1,0 +1,14 @@
+# ai-go-contributor requirements
+# All packages are lightweight — core logic uses only Python stdlib.
+# These are optional quality-of-life additions.
+
+# For colored terminal output (optional)
+# colorama>=0.4.6
+
+# For .env file support (optional — you can also export env vars directly)
+# python-dotenv>=1.0.0
+
+# No other dependencies! The project uses:
+#   - urllib (stdlib) for all HTTP calls
+#   - subprocess (stdlib) for git, go toolchain
+#   - json, re, pathlib, dataclasses (stdlib)

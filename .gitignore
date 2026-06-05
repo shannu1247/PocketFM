@@ -1,0 +1,20 @@
+# Environments
+.env
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Repositories cloned by the AI agent
+workspace/
+
+# Outputs (optional: you can remove this if you WANT to commit the outputs folder)
+# output/
+
+# OS generated files
+.DS_Store
+Thumbs.db
